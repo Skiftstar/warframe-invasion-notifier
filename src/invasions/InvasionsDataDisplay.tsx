@@ -5,7 +5,6 @@ import "./invasions.css";
 import Popup from "../common-components/Popup";
 import { Bell } from "lucide-react";
 import InvasionNotificationManager from "./components/InvasionNotificationManager";
-import Cookies from "js-cookie";
 
 function DataDisplay({
   errorCode,
