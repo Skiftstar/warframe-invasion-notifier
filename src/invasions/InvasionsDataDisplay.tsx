@@ -3,7 +3,7 @@ import { InvasionInfo, InvasionReward } from "../api";
 import SingleInvasionDisplay from "./components/SingleInvasionDisplay";
 import "./invasions.css";
 import Popup from "../common-components/Popup";
-import { Bell, BellRing, HashIcon } from "lucide-react";
+import { Bell, BellRing } from "lucide-react";
 import InvasionNotificationManager from "./components/InvasionNotificationManager";
 
 function DataDisplay({
