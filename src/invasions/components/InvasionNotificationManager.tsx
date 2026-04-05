@@ -1,5 +1,6 @@
-import { useState } from "react";
-import CustomSelect from "../../common-components/CustomSelect";
+import { useEffect, useState } from "react";
+import CustomMultiSelect from "../../common-components/CustomMultiSelect";
+import { getInvasionItemDrops, items } from "../../api";
 
 function InvasionNotificationManager({
   onSelectionChange,
@@ -8,28 +9,42 @@ function InvasionNotificationManager({
   onSelectionChange: (val: string[]) => void;
   selectedFilters: string[];
 }) {
-  const [activeFilter, setActiveFilter] = useState("");
+  const [invasionDrops, setInvasionDrops] = useState<string[]>([]);
 
   const defaultSelections = [
     "Fieldron",
     "Detonite Injector",
     "Mutalist Alad V Nav Coordinate",
     "Mutagen Mass",
-    "Vandal Weapon Part",
-    "Wraith Weapon Part",
     "Anything else",
+    ...invasionDrops,
   ];
 
-  const handleFilterChange = (value: string) => {
-    console.log("Filtering grid by:", value);
-    setActiveFilter(value);
-    // You would use this value to .filter() your grid data!
+  useEffect(() => {
+    requestPermission();
+  }, []);
+
+  useEffect(() => {
+    setInvasionDrops(getInvasionItemDrops());
+  }, [items]);
+
+  const requestPermission = () => {
+    if (!("Notification" in window)) {
+      console.log("This browser does not support desktop notification");
+      return;
+    }
+
+    Notification.requestPermission().then((permission) => {
+      if (permission === "granted") {
+        console.log("Permission granted!");
+      }
+    });
   };
 
   return (
     <div>
       <div>
-        <CustomSelect
+        <CustomMultiSelect
           options={defaultSelections}
           onChange={onSelectionChange}
           placeholder="Filter by Reward..."

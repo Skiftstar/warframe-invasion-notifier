@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import "./colors.css";
 import "./App.css";
-import { getInvasionStatus, InvasionInfo } from "./api";
+import { fetchItems, getInvasionStatus, InvasionInfo } from "./api";
 import Header from "./common-components/Header";
 import DataDisplay from "./invasions/InvasionsDataDisplay";
 
@@ -15,7 +15,18 @@ function App() {
 
   const refreshInvasionData = useCallback(async () => {
     setIsRefreshing(true);
+
+    try {
+      await fetchItems();
+    } catch (e: any) {
+      console.log(e);
+      setErrorCode(e.status);
+      setIsRefreshing(false);
+      return;
+    }
+
     const info = await getInvasionStatus();
+
     setIsRefreshing(false);
     if (typeof info === "number") {
       setErrorCode(info);

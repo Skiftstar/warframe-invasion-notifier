@@ -55,3 +55,28 @@
 .select-dropdown li:hover {
   background: #333;
 }
+
+.selected-items {
+  padding: 8px 0px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  transition: all 0.5s ease;
+  justify-content: start;
+  align-items: center;
+}
+
+.selected-item-container {
+  background-color: var(--infested-green);
+  border-radius: 10px;
+  height: 30px;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.selected-item-container:hover {
+  background-color: var(--grineer-red);
+}
