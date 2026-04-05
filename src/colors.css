@@ -1,0 +1,21 @@
+:root {
+  --bg-main: #222;
+  --bg-alt: #2c2f33;
+  --border-accent: #194c6c;
+  --grineer-red: #852d23;
+  --corpus-blue: #004d80;
+  --infested-green: #00523d;
+  --text-color: #b0e0e6;
+}
+
+.Grineer-color {
+  background-color: var(--grineer-red) !important;
+}
+
+.Corpus-color {
+  background-color: var(--corpus-blue) !important;
+}
+
+.Infested-color {
+  background-color: var(--infested-green) !important;
+}
