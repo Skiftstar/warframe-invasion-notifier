@@ -1,6 +1,6 @@
 import React from "react";
 import { InvasionInfo } from "../../api";
-import RewardThumbnail from "./RewardThumbnail";
+import RewardDisplay from "./RewardDisplay";
 
 function SingleInvasionDisplay({
   info,
@@ -17,7 +17,7 @@ function SingleInvasionDisplay({
       <div className="reward-display">
         <div className="attacker-reward">
           {info.attacker.reward ? (
-            <RewardThumbnail
+            <RewardDisplay
               reward={info.attacker.reward}
               color={`${info.attacker.faction}-color`}
             />
@@ -27,7 +27,7 @@ function SingleInvasionDisplay({
         </div>
         <div className="defender-reward">
           {info.defender.reward ? (
-            <RewardThumbnail
+            <RewardDisplay
               reward={info.defender.reward}
               color={`${info.defender.faction}-color`}
             />
