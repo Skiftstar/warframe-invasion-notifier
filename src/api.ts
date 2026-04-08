@@ -1,3 +1,5 @@
+import { updateInvasionDrops } from "./invasions/utils/InvasionUtil";
+
 const Warframe = require("warframe.js");
 
 export type InvasionReward = {
@@ -47,32 +49,6 @@ export const getInvasionStatus: () => Promise<
   return response;
 };
 
-// export const getInvasionItemsFromSearchQuery = async (
-//   query: string,
-// ): Promise<string[]> => {
-//   query = query.toLowerCase();
-
-//   if (items.length === 0) await fetchItems();
-
-//   const validItems: string[] = [];
-
-//   items
-//     .filter((item: any) => item.tags && item.tags.includes("Invasion Reward"))
-//     .forEach((item: any) => {
-//       if (!item.components || item.components.length === 0) {
-//         if (item.name.toLowerCase().startsWith(query))
-//           validItems.push(item.name);
-//       } else {
-//         item.components.forEach((comp: any) => {
-//           if (`${item.name} ${comp.name}`.toLowerCase().startsWith(query))
-//             validItems.push(`${item.name} ${comp.name}`);
-//         });
-//       }
-//     });
-
-//   return validItems;
-// };
-
 export const fetchItems = async () => {
   const res = await fetch("https://api.warframestat.us/items");
 
@@ -83,9 +59,10 @@ export const fetchItems = async () => {
 
   const data = await res.json();
   items = data;
+  updateInvasionDrops();
 };
 
-export const getInvasionItemDrops = () => {
+export const getInvasionWeaponComponents = () => {
   const drops: string[] = items
     .filter((item: any) => item.tags && item.tags.includes("Invasion Reward"))
     .filter((item) => item.components && item.components.length > 0)
