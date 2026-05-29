@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import CustomMultiSelect from "../../common-components/CustomMultiSelect";
-import { getInvasionItemDrops, items } from "../../api";
+import { getInvasionDrops, updateInvasionDrops } from "../utils/InvasionUtil";
 
 function InvasionNotificationManager({
   onSelectionChange,
@@ -9,24 +9,9 @@ function InvasionNotificationManager({
   onSelectionChange: (val: string[]) => void;
   selectedFilters: string[];
 }) {
-  const [invasionDrops, setInvasionDrops] = useState<string[]>([]);
-
-  const defaultSelections = [
-    "Fieldron",
-    "Detonite Injector",
-    "Mutalist Alad V Nav Coordinate",
-    "Mutagen Mass",
-    "Anything else",
-    ...invasionDrops,
-  ];
-
   useEffect(() => {
     requestPermission();
   }, []);
-
-  useEffect(() => {
-    setInvasionDrops(getInvasionItemDrops());
-  }, [items]);
 
   const requestPermission = () => {
     if (!("Notification" in window)) {
@@ -45,7 +30,7 @@ function InvasionNotificationManager({
     <div>
       <div>
         <CustomMultiSelect
-          options={defaultSelections}
+          options={getInvasionDrops()}
           onChange={onSelectionChange}
           placeholder="Filter by Reward..."
           selectedItems={selectedFilters}

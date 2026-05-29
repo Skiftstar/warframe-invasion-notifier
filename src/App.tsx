@@ -19,7 +19,6 @@ function App() {
     try {
       await fetchItems();
     } catch (e: any) {
-      console.log(e);
       setErrorCode(e.status);
       setIsRefreshing(false);
       return;
